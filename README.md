@@ -11,8 +11,11 @@ Currently, two official plugins are available:
  -React + Vite
  -Configured tallwidcs
  -Header
+ -routing of App
  -Login Form
  -Sign up form
+ -Form validation
+ -usRef Hook
 
 
  # Features
