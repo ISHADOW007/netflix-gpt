@@ -10,7 +10,9 @@ Currently, two official plugins are available:
 # Netflix GPT
  -React + Vite
  -Configured tallwidcs
- -
+ -Header
+ -Login Form
+ -Sign up form
 
 
  # Features
