@@ -16,6 +16,9 @@ Currently, two official plugins are available:
  -Sign up form
  -Form validation
  -usRef Hook
+ -Firebase Setup
+ -Deploy our app to production
+ -create Signup User Account 
 
 
  # Features

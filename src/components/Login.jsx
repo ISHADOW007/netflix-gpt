@@ -2,6 +2,10 @@ import Header from "./Header";
 import { useState, useRef } from "react";
 import { checkValidateData } from "../utils/validate";
 
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../utils/firebase";
+
+
 const Login = () => {
     const [isSignInForm, setIsSignInForm] = useState(true);
     const emailRef = useRef(); // useRef to refer to the element
@@ -21,6 +25,37 @@ const Login = () => {
         console.log(password);
         const message = checkValidateData(email, password);
         setErrorMessage(message);
+        if(message) return;
+
+        if(!isSignInForm){
+            // Sign Up Logic
+            createUserWithEmailAndPassword(auth, email, password)
+              .then((userCredential) => {
+             // Signed up 
+             const user = userCredential.user;
+             console.log(user);
+        })
+            .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            setErrorMessage(errorCode + "-" + errorMessage);
+  });
+        }
+        else{
+            // Sign In
+            signInWithEmailAndPassword(auth, email, password)
+             .then((userCredential) => {
+                // Signed in 
+            const user = userCredential.user;
+            console.log(user);
+        })
+        .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            setErrorMessage(errorCode+ "-"+errorMessage)
+  });
+        }
+
     };
 
     return (
