@@ -1,16 +1,21 @@
 import Header from "./Header";
 import { useState, useRef } from "react";
 import { checkValidateData } from "../utils/validate";
-
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import {  createUserWithEmailAndPassword, signInWithEmailAndPassword,updateProfile} from "firebase/auth";
 import { auth } from "../utils/firebase";
-
+import { useNavigate } from "react-router-dom";
+import { addUser } from "../utils/userSlice";
+import { useDispatch } from "react-redux";
 
 const Login = () => {
     const [isSignInForm, setIsSignInForm] = useState(true);
-    const emailRef = useRef(); // useRef to refer to the element
-    const passwordRef = useRef();
     const [errorMessage, setErrorMessage] = useState(null);
+    const navigate= useNavigate();
+    const dispatch=useDispatch()
+
+    const nameRef = useRef(null);
+    const emailRef = useRef(null); // useRef to refer to the element
+    const passwordRef = useRef(null);
 
     const toggleSignInForm = () => {
         setIsSignInForm(!isSignInForm);
@@ -18,11 +23,10 @@ const Login = () => {
 
     const handleButtonsClick = () => {
         // Validate the form data
+        const name= nameRef?.current?.value;
+        console.log(name)
         const email = emailRef.current.value;
         const password = passwordRef.current.value;
-
-        console.log(email);
-        console.log(password);
         const message = checkValidateData(email, password);
         setErrorMessage(message);
         if(message) return;
@@ -33,7 +37,19 @@ const Login = () => {
               .then((userCredential) => {
              // Signed up 
              const user = userCredential.user;
+             updateProfile(user, {
+                displayName: name, photoURL:"https://w7.pngwing.com/pngs/393/55/png-transparent-netflix-logo-thumbnail.png"
+              }).then(() => {
+                // Profile updated!
+                const {uid,email,displayName,photoURL} = user; //updated user
+                dispatch(addUser({uid: uid, email:email, displayName :displayName,photoURL:photoURL}));
+                navigate("/browse");
+              }).catch((error) => {
+                // An error occurred
+                setErrorMessage(error.message)
+              });
              console.log(user);
+             
         })
             .catch((error) => {
             const errorCode = error.code;
@@ -47,7 +63,11 @@ const Login = () => {
              .then((userCredential) => {
                 // Signed in 
             const user = userCredential.user;
+             const {uid,email,displayName,photoURL} = user; 
+            dispatch(addUser({uid: uid, email:email, displayName :displayName,photoURL:photoURL}));
+
             console.log(user);
+            navigate("browse");
         })
         .catch((error) => {
             const errorCode = error.code;
@@ -57,6 +77,7 @@ const Login = () => {
         }
 
     };
+    
 
     return (
         <div>
@@ -70,7 +91,7 @@ const Login = () => {
             <form onSubmit={(e) => e.preventDefault()} className="p-12 bg-black absolute w-3/12 my-24 mx-auto right-0 left-0 text-white bg-opacity-100">
                 <h1 className="font-bold text-2xl py-4">{isSignInForm ? "Sign In" : "Sign Up"}</h1>
                 {!isSignInForm &&
-                    <input type="text" placeholder="Full Name" className="p-4 my-4 w-full bg-gray-700 cursor-pointer" />}
+                    <input ref={nameRef} type="text" placeholder="Full Name" className="p-4 my-4 w-full bg-gray-700 cursor-pointer" />}
                 <input ref={emailRef} type="text" placeholder="Email Address" className="p-4 my-4 w-full bg-gray-700 cursor-pointer" />
                 <input ref={passwordRef} type="password" placeholder="Password" className="p-4 my-4 w-full bg-gray-700 cursor-pointer" />
                 {errorMessage && <p className="text-red-500">{errorMessage}</p>}

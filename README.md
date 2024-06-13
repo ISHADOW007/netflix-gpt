@@ -18,7 +18,11 @@ Currently, two official plugins are available:
  -usRef Hook
  -Firebase Setup
  -Deploy our app to production
- -create Signup User Account 
+ -create Signup User Account
+ -create Signin User Api
+ -Created Redux Store with  userSlice
+ -Implemented Sign out 
+ -Update Profile
 
 
  # Features

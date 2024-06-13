@@ -1,6 +1,10 @@
+import Header from "./Header";
 const Browswe =()=>{
     return (
-        <div>Browse</div>
+        <div>
+        <Header/>
+            </div>
+        
     )
 
 }
