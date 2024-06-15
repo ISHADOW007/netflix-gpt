@@ -3,14 +3,14 @@ import { useState, useRef } from "react";
 import { checkValidateData } from "../utils/validate";
 import {  createUserWithEmailAndPassword, signInWithEmailAndPassword,updateProfile} from "firebase/auth";
 import { auth } from "../utils/firebase";
-import { useNavigate } from "react-router-dom";
 import { addUser } from "../utils/userSlice";
 import { useDispatch } from "react-redux";
+import { USER_AVTAR } from "../utils/constants";
 
 const Login = () => {
     const [isSignInForm, setIsSignInForm] = useState(true);
     const [errorMessage, setErrorMessage] = useState(null);
-    const navigate= useNavigate();
+   
     const dispatch=useDispatch()
 
     const nameRef = useRef(null);
@@ -38,12 +38,12 @@ const Login = () => {
              // Signed up 
              const user = userCredential.user;
              updateProfile(user, {
-                displayName: name, photoURL:"https://w7.pngwing.com/pngs/393/55/png-transparent-netflix-logo-thumbnail.png"
+                displayName: name, photoURL:USER_AVTAR ,
               }).then(() => {
                 // Profile updated!
-                const {uid,email,displayName,photoURL} = user; //updated user
+                const {uid,email,displayName,photoURL} = auth.currentUser; //updated user
                 dispatch(addUser({uid: uid, email:email, displayName :displayName,photoURL:photoURL}));
-                navigate("/browse");
+                
               }).catch((error) => {
                 // An error occurred
                 setErrorMessage(error.message)
@@ -63,11 +63,8 @@ const Login = () => {
              .then((userCredential) => {
                 // Signed in 
             const user = userCredential.user;
-             const {uid,email,displayName,photoURL} = user; 
-            dispatch(addUser({uid: uid, email:email, displayName :displayName,photoURL:photoURL}));
-
+           
             console.log(user);
-            navigate("browse");
         })
         .catch((error) => {
             const errorCode = error.code;

@@ -1,11 +1,27 @@
 import Header from "./Header";
-const Browswe =()=>{
+import useNowPlayingMovies from "../../hooks/useNowPlayingMovies";
+import MainContainer from "./MainContainer";
+import SecoundaryContainer from "./SecoundaryContainer";
+
+const Browse =()=>{
+    useNowPlayingMovies();
+
     return (
         <div>
         <Header/>
-            </div>
-        
-    )
+        <MainContainer/>
+        <SecoundaryContainer/>
+        {/* 
+            MainContainer
+             -VideoBackground
+             -VideoTitle
+            SecoundaryContainer
+             -MovieList*n
+              -cards*n
 
-}
-export default Browswe;
+        */}
+        </div>
+        
+    );
+};
+export default Browse;
