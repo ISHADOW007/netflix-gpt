@@ -37,6 +37,7 @@ Currently, two official plugins are available:
  -Update store with Trailer Video Data
  -Embeded the Youtube video and make it autoplay 
  -Tailwind classes to make MainContainer  it look  awesome
+ -build Secoundary Componenet 
 
  # Features
  - Login/Sign UP
