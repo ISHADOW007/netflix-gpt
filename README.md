@@ -38,6 +38,11 @@ Currently, two official plugins are available:
  -Embeded the Youtube video and make it autoplay 
  -Tailwind classes to make MainContainer  it look  awesome
  -build Secoundary Componenet 
+ -Build Movie List
+ -Build Movie Card
+ -TMDB IMAGE CDN URL
+ -Made the Browse pageamazing with Tailwind CSS
+ -Use PopularMovies Custom Hook
 
  # Features
  - Login/Sign UP
