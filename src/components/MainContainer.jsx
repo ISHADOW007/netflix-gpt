@@ -6,9 +6,9 @@ const MainContainer=()=>{
     if(movies==null)
         return;// early return
     const mainMovies = movies[0];
-    console.log(mainMovies);
+    
     const {original_title,overview,id}=mainMovies;
-    console.log(id)
+    
     return (
          <div>
             <VideoTitle title={original_title} overview={overview}/>

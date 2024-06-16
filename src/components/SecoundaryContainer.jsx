@@ -3,8 +3,7 @@ import MovieList from "./MovieList";
 import { useSelector } from "react-redux";
 const SecoundaryContainer=()=>{
     const movie= useSelector(store=>store.movies);
-    console.log(movie.PopularMovies)
-    console.log(movie.nowPlayingMovies)
+    
     return (
     <div className=" bg-black">
         <div className="-mt-52 pl-12 relative z-20">

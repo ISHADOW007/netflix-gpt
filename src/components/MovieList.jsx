@@ -3,9 +3,7 @@ import MovieCard from "./MovieCard";
 
 const MovieList = ({ title, movies }) => {
   // Logging the movies and title for debugging purposes
-  console.log("Movies:", movies);
-  console.log("Title:", title);
-
+ 
   return (
     <div className="px-6 ">
         <h1 className="text-3xl py-4 text-white">{title}</h1>

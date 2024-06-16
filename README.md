@@ -43,6 +43,10 @@ Currently, two official plugins are available:
  -TMDB IMAGE CDN URL
  -Made the Browse pageamazing with Tailwind CSS
  -Use PopularMovies Custom Hook
+ - GPT Search features
+  -GPTSearch Page
+  -GPT Search Bar
+ -(BONUS) Multi-language features in our App
 
  # Features
  - Login/Sign UP
