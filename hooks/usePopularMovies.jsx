@@ -1,4 +1,4 @@
-import { useDispatch } from "react-redux";
+import { useDispatch,useSelector} from "react-redux";
 import { useEffect } from "react";
 import { API_OPTIONS } from "../src/utils/constants";
 import { addPopularMovies } from "../src/utils/moviesSlice";
@@ -6,6 +6,7 @@ import { addPopularMovies } from "../src/utils/moviesSlice";
 const usePopularMovies = () => {
    //Fetch Data from TMDB API AND UPDATE STORE
   const dispatch = useDispatch();
+  const popularMovies    = useSelector((store)=> store.movies.popularMovies);
 
   const getPopularMovies = async () => {
     try {
@@ -24,9 +25,9 @@ const usePopularMovies = () => {
   };
 
   useEffect(() => {
-    getPopularMovies();
+    // memomization reduce lots api call
+    !popularMovies&&getPopularMovies();
   }, [dispatch]); // Including dispatch in the dependency array
 };
 
 export default usePopularMovies;
-;

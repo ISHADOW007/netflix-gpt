@@ -47,6 +47,10 @@ Currently, two official plugins are available:
   -GPTSearch Page
   -GPT Search Bar
  -(BONUS) Multi-language features in our App
+ -created env file add the important key in it to secure them being hacked
+ -Memomization of trailervideo , usePopularMovies , useNowPlayingMovies
+ 
+
 
  # Features
  - Login/Sign UP
